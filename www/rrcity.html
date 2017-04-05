@@ -1,0 +1,94 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="css/rrc.css"/>
+<title>智能社-www.zhinegshe.com</title>
+<style>
+</style>
+<script src="js/jquery.js"></script>
+<script src="js/angular.js"></script>
+<script>
+	var app=angular.module('app',[]);
+	
+	app.controller('test',function($scope,$http){
+		
+		$http.get('/city').success(function(data){
+			//console.log(data);
+			
+			$scope.arr=[];
+			$scope.json={};
+			
+			$scope.arrZb=[];
+			$scope.arrHot=[];
+			if(data.ok){
+				$scope.data=data.data;
+				
+				angular.forEach($scope.data,function(v,k){
+					//console.log(v);
+					$scope.json[v.cityLetter]=0;
+					if(v.citySurr){
+						$scope.arrZb.push(v.cityName);
+					}
+					if(v.cityHot){
+						$scope.arrHot.push(v.cityName);
+					}
+				});
+				//console.log($scope.json);
+				
+				angular.forEach($scope.json,function(v1,k1){
+					//console.log(k1);
+					let arr2=[];
+
+					angular.forEach($scope.data,function(v,k){
+						if(k1==v.cityLetter){
+							arr2.push(v.cityName);
+                            console.log(k1);
+						}	
+					})//B{所有的城市}
+					$scope.json={};
+					$scope.json.a=k1;
+					$scope.json.b=arr2;	
+					
+					$scope.arr.push($scope.json);
+				});
+			}
+			
+			
+		}).error(function(){
+			alert('错误了');	
+		})
+	})
+
+</script>
+</head>
+
+<body ng-controller="test">
+	<div class="city-box" ng-mouseover="a=!a" ng-mouseout="a=!a">
+    	<a href="javascript:;" class="city-name">北京</a>
+        <div class="box-xiala" ng-show="a">
+        	<div class="city-xiala">
+                <p>
+                    <a href="javascript:;">周边</a>
+                    <a href="javascript:;">热门</a> 
+                    <a href="javascript:;">B</a> 
+                    <a href="javascript:;">C</a> 
+                    <a href="javascript:;">F</a> 
+                    <a href="javascript:;">G</a> 
+                    <a href="javascript:;">H</a>
+                </p>
+                <ul>
+                    <li><h3>周边</h3><a href="javascript:;" ng-repeat="i in arrZb">{{i}}</a></li>
+                    <li><h3>热门</h3><a href="javascript:;" ng-repeat="i in arrHot">{{i}}</a></li>
+                </ul>
+                <ol id="ol1">
+                    <li ng-repeat="item in arr|orderBy:'a'"><h3>{{item.a}}</h3><a href="javascript:;" ng-repeat="i in item.b">{{i}}</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

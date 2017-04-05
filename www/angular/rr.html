@@ -1,0 +1,519 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+<meta charset="utf-8">
+<title>人人车</title>
+<link href="css/base.css" rel="stylesheet"/>
+<link href="css/common.css" rel="stylesheet"/>
+<link href="css/index.css" rel="stylesheet"/>
+<style>
+	*{margin:0;padding:0;}
+</style>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script>
+        let app=angular.module('app',[]);
+        app.controller('test',function ($scope,$http) {
+            $http.get('/get').success(function (data) {
+                console.log(data)
+                $scope.arr=[];
+                $scope.json={};
+                $scope.Periphery=[];
+                $scope.Popular=[];
+                if(data.error){
+                    $scope.data=data.data;
+                    angular.forEach($scope.data,function (v, k) {//周边热门
+                        $scope.json[v.Initials]=0;
+
+                        if(v.Periphery){
+                            $scope.Periphery.push(v.area);
+                        }
+                        if(v.Popular){
+                            $scope.Popular.push(v.area);
+
+                        }
+                    });
+                    angular.forEach($scope.json,function (v1, k1) {
+                        let arr2=[];
+                        angular.forEach($scope.data,function (v, k) {
+
+                            if(k1==v.Initials){
+                                arr2.push(v.area);console.log(arr2)
+                            }
+                        });
+                        $scope.json={};
+                        $scope.json.a=k1;
+                        $scope.json.b=arr2;
+
+                        $scope.arr.push($scope.json);
+
+                    })
+                }else{
+                    alert('失败')
+                }
+
+            })
+        })
+    </script>
+</head>
+
+<body ng-controller="test">
+<div class="box">
+	<div class="box2">
+        <div class="binner clearfix">
+        	<img src="img/2017-02-22/1487746298652.png" alt="" class="img1"/>
+            <a href="javascript:;" class="logo"></a>
+            <div class="beijing">
+            		<div class="beijing3"></div>
+            		<div class="beijing2">
+                	<a href="javascript:;">北京<div class="xiabiao"></div></a>
+                    </div>
+                    <div class="diqu1"></div>
+                   	<div class="diqu">
+                    	<div class="city" id="city">
+                            <a href="javascript:;">周边</a>
+                            <a href="javascript:;">热门</a>
+                            <a href="javascript:;">B</a>
+                            <a href="javascript:;">C</a>
+                            <a href="javascript:;">D</a>
+                            <a href="javascript:;">F</a>
+                            <a href="javascript:;">G</a>
+                            <a href="javascript:;">H</a>
+                            <a href="javascript:;">J</a>
+                            <a href="javascript:;">K</a>
+                            <a href="javascript:;">L</a>
+                            <a href="javascript:;">M</a>
+                            <a href="javascript:;">N</a>
+                            <a href="javascript:;">Q</a>
+                            <a href="javascript:;">S</a>
+                            <a href="javascript:;">T</a>
+                            <a href="javascript:;">W</a>
+                            <a href="javascript:;">X</a>
+                            <a href="javascript:;">Y</a>
+                            <a href="javascript:;">Z</a>
+                        </div>
+                        <div class="city2" id="city2">
+                        </div>
+                        <div class="bigCity">
+                            <div class="sitySur">
+                                <div class="citysur clearfix">
+                                    <span>周边</span>
+                                    <a href="javascript:;" ng-repeat="i in Periphery">{{i}}</a>
+                                </div>
+                                <div class="citysur clearfix">
+                                    <span>热门</span>
+                                    <a href="javascript:;" ng-repeat="i in Popular">{{i}}</a>
+                                </div>
+                            </div>
+                            <ul class="coutuy clearfix">
+                            	<li ng-repeat="item in arr|orderBy:'a'"><h3>{{item.a}}</h3><a href="javascript:;" ng-repeat="i in item.b">{{i}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+            <ul class="header">
+                <li><a href="javascript:;">买车</a></li>
+                <li><a href="javascript:;">卖车</a></li>
+                <li><a href="javascript:;">找车</a></li>
+                <li><a href="javascript:;">论坛</a></li>
+                <li><a href="javascript:;">服务保障</a></li>
+            </ul>
+            <div class="xianjin">
+                <img src="img/2017-02-22/1487746297391.png" alt="" class="img2"/>
+                <div class="xianjin2">
+                	<img src="img/2017-02-22/headerHoverPic-ee5c43d0-w101.png" alt=""/>
+                </div>
+            </div>
+            <div class="headerr">
+            	<a href="javascript:;" class="denglv">
+            		<img src="img/3.png" alt=""/>
+                    登录
+                </a>
+                <a href="javascript:;" class="phone">
+                	400-017-5792
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+    	<div class="binner">
+        	<a href="javascript:;" style="display:block;">
+        		<img src="img/2017-02-22/34.png" alt=""/>
+            </a>
+            <div class="lunbo">
+            	<a href="javascript:;">极速卖车,全程免费!</a>
+                <a href="javascript:;">评估师棍哥日记</a>
+                <a href="javascript:;">人人车完成新一轮1.5亿美元融资</a>
+                <a href="javascript:;" style="border-bottom:none;">拒绝一百万次,只为更加靠谱</a>
+            </div>
+        </div>
+    </div>
+    <div class="banner2">
+    	<div class="binner clearfix">
+        	<div class="contentf">
+            	<a href="javascript:;" class="fu">
+        			<img src="img/6.png" alt=""/>
+                </a>
+                <ul>
+                	<li class="xing" style="width:20px;margin-right:6px;height:20px; background:url(img/7.png) no-repeat;"></li>
+                    <li><a href="javascript:;">大众</a></li>
+                    <li><a href="javascript:;">宝马</a></li>
+                    <li><a href="javascript:;">奥迪</a></li>
+                    <li><a href="javascript:;">丰田</a></li>
+                    <li><a href="javascript:;">奔驰</a></li>
+                    <li><a href="javascript:;">本田</a></li>
+                    <li><a href="javascript:;">别克</a></li>
+                    <li><a href="javascript:;">福特</a></li>
+                    <li><a href="javascript:;">日产</a></li>
+                    <li><a href="javascript:;">马自达</a></li>
+                    <li><a href="javascript:;">雪佛兰</a></li>
+                    <li><a href="javascript:;" class="gengduo">更多</a></li>
+                </ul>
+                <ul>
+                	<li class="xing" style="width:20px;margin-right:6px;height:20px; background:url(img/8.png) no-repeat;"></li>
+                    <li><a href="javascript:;">3万以下</a></li>
+                    <li><a href="javascript:;">3-5万</a></li>
+                    <li><a href="javascript:;">5-10万</a></li>
+                    <li><a href="javascript:;">10-15万</a></li>
+                    <li><a href="javascript:;">15-20万</a></li>
+                    <li><a href="javascript:;">20-30万</a></li>
+                    <li><a href="javascript:;">30-60万</a></li>
+                    <li><a href="javascript:;">60万以上</a></li>
+                </ul>
+                <ul>
+                	<li class="xing" style="width:20px;margin-right:6px;height:20px; background:url(img/9.png) no-repeat;"></li>
+                    <li><a href="javascript:;">SUV</a></li>
+                    <li><a href="javascript:;">商务车</a></li>
+                    <li><a href="javascript:;">跑车</a></li>
+                    <li><a href="javascript:;">急售</a></li>
+                    <li><a href="javascript:;">准新车</a></li>
+                    <li><a href="javascript:;">超值</a></li>
+                    <li><a href="javascript:;">促销车</a></li>
+                    <li><a href="javascript:;">60万以上</a></li>
+                </ul>
+                <div class="input">
+                	<input type="text" placeholder="请输入关键字,如:别克 1.6L"/>
+                    <div></div>
+                </div>
+                
+            </div>
+            <div class="contentr">
+                <a href="javascript:;" class="fu">
+                    <img src="img/13.png" alt=""/>
+                </a>
+                <div class="maiche">
+                	<div class="maichet clearfix">
+                		<p class="maichet-p">快速卖车</p>
+                        <p class="maichet-p2">已有<span>334715</span>卖车</p>
+                    </div>
+                    <input type="text" placeholder="手机号码(必填)" class="input1"/>
+                    <div class="help">帮我卖车</div>
+                    <div class="hou clearfix">
+                    	<p>后续计划</p>
+                        <div></div>
+                        <p style="color:#000;">团购新车</p>
+                        <div></div>
+                        <p style="color:#000;">买二手车</p>
+                        <div></div>
+                        <p style="color:#000;">不买车</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner3">
+    	<div class="binner clearfix">
+            <a href="javascript:;" class="friendlink">
+                <p>分期购车</p>
+                <p>0首付,门槛低,放款快</p>
+                <img src="img/2017-02-22/R44u-4paLUlVuXmB-w88.png" alt=""/>
+            </a>
+            <a href="javascript:;" class="friendlink">
+                <p>帮我找车</p>
+                <p>满足你的个性需求</p>
+                <img src="img/2017-02-22/K543HoC2VUNNI8GK-w104.png" alt=""/>
+            </a>
+            <a href="javascript:;" class="friendlink">
+                <p>关注微信</p>
+                <p>第一手好车咨询,更多惊喜...</p>
+                <img src="img/2017-02-22/lwfWBdpPJZmYP4fB-w93.png" alt=""/>
+            </a>
+            <div class="friendlinkr">
+            	<div class="friendlinkr-p clearfix">
+                	<a href="javascript:;" class="friendlinkr-p-p">论坛</a>
+                    <p class="friendlinkr-p-p2"></p>
+                    <a href="javascript:;" class="friendlinkr-p-p3">更多</a>
+                </div>
+                <div style="margin:10px 0 19px;">
+                    <a href="javascript:;" class="friendlinkr-div clearfix">
+                        <p></p>
+                        <p>必戳:【爱车达人】主题征文 每天送你千...</p>
+                        <p></p>
+                        <p>蓝一枚</p>
+                    </a>
+                    <a href="javascript:;" class="friendlinkr-div clearfix">
+                        <p></p>
+                        <p>必戳:【爱车达人】主题征文 每天送你千...</p>
+                        <p></p>
+                        <p>蓝一枚</p>
+                    </a>
+                    <a href="javascript:;" class="friendlinkr-div clearfix">
+                        <p></p>
+                        <p>必戳:【爱车达人】主题征文 每天送你千...</p>
+                        <p></p>
+                        <p>蓝一枚</p>
+                    </a>
+                    <a href="javascript:;" class="friendlinkr-div clearfix">
+                        <p></p>
+                        <p>必戳:【爱车达人】主题征文 每天送你千...</p>
+                        <p></p>
+                        <p>蓝一枚</p>
+                    </a>
+                </div>
+                <div class="friendlinkr-footer clearfix">
+                	<p>卖车&评估</p>
+                    <p>买车&养车</p>
+                    <p>购车推荐</p>
+                    <p>新手攻略</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner4">
+    	<div class="binner">
+        	<ul class="hot clearfix">
+            	<li>
+                <a href="javascript:;">特价好车</a>
+                <p class="pp"></p>
+                </li>
+                <li><a href="javascript:;">5万内精选</a><p class="pp"></p></li>
+                <li><a href="javascript:;">SUV</a><p class="pp"></p></li>
+                <li><a href="javascript:;">急售</a><p class="pp"></p></li>
+                <li><a href="javascript:;">大众情结</a><p class="pp"></p></li>
+                <li><a href="javascript:;">更多</a><p class="pp"></p></li>
+            </ul>
+            <div class="Bigcar clearfix">
+            	<div class="car" style="margin-right:14px;">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car" style="margin-right:14px;">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car" style="margin-right:14px;">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car" style="margin-right:14px;">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car" style="margin-right:14px;">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car" style="margin-right:14px;">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+                <div class="car">
+                	<img src="img/18.png" alt=""/>
+                    <p class="car-p1">现代-瑞纳2014款 1.4L自动领先型GLX</p>
+                    <p class="car-p2">2014年06月/4.51公里<span>急售</span></p>
+                    <p class="car-p3">5.85<span>万</span></p>
+                    <p class="car-p4">新车价:9.29万</p>
+                    <p class="car-p5">一砍价</p>
+                </div>
+            </div>
+            <a href="javascript:;" class="chazhao">查看更多</a>
+        </div>
+    </div>
+    <div class="banner5"></div>
+    <div class="banner6">
+    	<div class="binner clearfix">
+        	<div class="caringl">
+            	<p class="caringl-p">车主故事<span>更多</span></p>
+                <ul>
+                	<a href="javascript:;" class="btnl"></a>
+                	<li></li>
+                    <li></li>
+                    <li></li>
+                    <a href="javascript:;" class="btnr"></a>
+                </ul>
+                <div class="down">
+                	<div class="down-content">
+                    	<img src="img/2017-02-22/1484035189974741-w109.jpeg" alt=""/>
+                        <span>这个漂亮姑娘,买车速度堪比老司机</span><br>
+                        <i>小马达,北漂单身女青年,2016年11月24日于人人车收获了一台马自达3-昂克塞拉.</i>
+                    </div>
+                    <div class="down-content2">
+                    	<img src="img/2017-02-22/1484035189974741-w109.jpeg" alt=""/>
+                        <span>这个漂亮姑娘,买车速度堪比老司机</span><br>
+                        <i>小马达,北漂单身女青年,2016年11月24日于人人车收获了一台马自达3-昂克塞拉.</i>
+                    </div>
+               	</div>
+            </div>
+            <div class="caringr">
+            	<h2>媒体报道</h2>
+                <div style="width:100%;margin-top:29px;">
+                	<p>QuestMoblie二手车电商数据解读:人人车行业领先</p>
+                    <p>人人车完成D轮1.5亿美元融资 王思聪参投</p>
+                    <p>人人车用户自述两次购车经历:人人车,靠谱!</p>
+                    <p>人人车李建:没什么比善良更重要,产品也是</p>
+                    <p>二手车电商大战,人人车获胜,凭什么!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner7">
+    	<div class="binner">
+        	<div class="bao clearfix">
+            	<p>一年/两万公里质保</p>
+                <p style="margin-left:100px;">14天可退</p>
+                <p style="margin-left:100px;">249项检测</p>
+                <p style="margin-left:100px;">100%个人车源</p>
+                <p style="margin-left:100px;">一站式服务</p>
+            </div>
+            <div class="footer clearfix">
+                <div class="call" style="margin-right:62px;">
+                    <h3>关于我们</h3>
+                    <p>公司介绍</p>
+                    <p>联系我们</p>
+                    <p>加入我们</p>
+                </div>
+                <div class="call" style="margin-right:62px;">
+                    <h3>交易流程</h3>
+                    <p>买车流程</p>
+                    <p>卖车流程</p>
+                    <p>异地购车</p>
+                </div>
+                <div class="call" style="margin-right:62px;">
+                    <h3>新手购车指南</h3>
+                    <p>新车vs二手车</p>
+                    <p>选车注意事相</p>
+                    <p>过户手续办理</p>
+                </div>
+                <div class="call">
+                    <h3>二手车精选</h3>
+                    <p>车型库</p>
+                    <p>二手车咨询</p>
+                    <p>二手车问答</p>
+                </div>
+                <div class="call" style="margin-right:58px;">
+                    <p style="margin-top:89px;">二手车估价</p>
+                    <p>二手车迁入标准</p>
+                    <p>二手车贷款</p>
+                </div>
+                <div class="erwei">
+                	<div class="erwei-div">
+                    	<img src="img/24.png" alt=""/>
+                    </div>
+                    <p>关注微信</p>
+                </div>
+                <div class="erwei" style="margin-left:20px;">
+                	<div class="erwei-div">
+                    	<img src="img/24.png" alt=""/>
+                    </div>
+                    <p>下载APP</p>
+                </div>
+                <div class="phone2">
+                	<h4>400-861-0500</h4>
+                   	<p>免费咨询(咨询、建议、投诉)</p>
+                    <p>周一至周六9:00-19:00</p>
+                    <ul class="clearfix">
+                    	<li>官方微信</li>
+                        <li style="margin-left:28px;">官方微博</li>
+                        <li>官方论坛</li>
+                        <li style="margin-left:28px;">举报事故车</li>
+                    </ul>
+                </div>
+                <div class="number">
+                	<p>按字母查找</p>
+                    <ul>
+                    	<li>A</li>
+                        <li>B</li>
+                        <li>C</li>
+                        <li>D</li>
+                        <li>F</li>
+                        <li>G</li>
+                        <li>H</li>
+                        <li>J</li>
+                        <li>K</li>
+                        <li>L</li>
+                        <li>M</li>
+                        <li>N</li>
+                        <li>Q</li>
+                        <li>R</li>
+                        <li>S</li>
+                        <li>W</li>
+                        <li>X</li>
+                        <li>Y</li>
+                        <li>Z</li>
+                    </ul>
+            </div>
+       		</div>
+            <ul class="shenzhen clearfix">
+                <li><a href="javascript:;">深圳二手车</a></li>
+                <li style="padding-left:20px;"><a href="javascript:;">热门城市</a></li>
+                <li style="padding-left:20px;"><a href="javascript:;">热门品牌</a></li>
+                <li style="padding-left:20px;"><a href="javascript:;">热门车系</a></li>
+                <li style="padding-left:20px;"><a href="javascript:;">手机照二手车</a></li>
+                <li style="padding-left:20px; border:none;"><a href="javascript:;">友情链接</a></li>
+          	</ul>
+            <div class="ershou">北京二手车，人人北京二手频道。专注北京个人二手车，提供大量真实、优质的北京个人二手出售转让信息，供您选择。我们致力于打造专业北京二手车交易市场，所以每辆二手车，都经过我们的二手车检测师专业、全面、权威的检测！购买北京二手车，就上人人车北京频道。 北京二手车触屏版。</div>
+        </div>
+    </div>
+    <div class="banner8">
+    	<div class="binner" style="text-align:center;line-height:60px;">
+        	<span>Copyright © 2017, renrenche.com, All Rights Reserved  京公网安备 11010802015302号  京ICP证160608号</span>
+        </div> 
+    </div>
+    <div class="fix clearfix">
+    	<div class="free"><a href="javascript:;">免费电话</a></div>
+        <div class="free2">
+        <a href="javascript:;">APP</a>
+        <div class="free2-1">
+        	<img src="img/2017-02-22/image-qr-pc_yl-757-20161018165504-w81.png" alt=""/>
+        </div>
+        </div>
+        <div class="free3"><a href="javascript:;">公众号</a></div>
+        <div class="free4"></div>
+    </div>
+</div>
+
+</body>
+</html>

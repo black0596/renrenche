@@ -1,0 +1,24 @@
+.fl {
+  float: left; }
+
+.fr {
+  float: right; }
+
+.clearfix:after {
+  display: block;
+  content: "";
+  clear: both; }
+
+.clearfix {
+  zoom: 1; }
+
+.ab {
+  position: absolute; }
+
+.re {
+  position: relative; }
+
+.fixed {
+  position: fixed;
+  z-index: 400; }
+/*# sourceMappingURL=common.css.map */

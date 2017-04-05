@@ -1,0 +1,12 @@
+Node.Js----笔记
+路由绑定 ：
+    通过server.get()或post()等方法可以把一个url路径
+    和一个或N个函数进行绑定
+    server.get('/',function(req,res,next){})
+        req:-reques内置对象-保存客户端请求的一些数据-http.request
+        res:-response对象-服务器输出对象，提供一些跟服务器端输出相关的想法-htt.response
+        next:-方法，用于执行下一个和路径匹配的函数
+    内容输出
+        通过res.send(string)发送内容到客户端
+
+

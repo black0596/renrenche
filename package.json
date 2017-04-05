@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "body-parser": "^1.17.0"
+  },
+  "name": "123",
+  "version": "1.0.0",
+  "main": "sql.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

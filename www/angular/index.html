@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style></style>
+    <script src="js/jquery.js"></script>
+    <script src="js/angular.js"></script>
+    <script>
+
+        let app=angular.module('app',[]);
+        app.controller('test',function ($scope,$http) {
+            $http.get('/src').success((data)=>{
+                if(data.error){
+                    $scope.data=data.data;
+                }else{
+                    console.log('出错了')
+                }
+            });
+            $scope.sele=(n)=>{
+                Console.log(n)
+            }
+        })
+    </script>
+</head>
+<body ng-controller="test">
+<a href="javascript:;" ng-mouseover="sele($index)" ng-repeat="item in data" ng-class="{active:$index==sele()}">{{item.alt}}</a>
+</body>
+</html>
